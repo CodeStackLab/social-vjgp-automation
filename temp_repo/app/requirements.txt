@@ -1,0 +1,15 @@
+requests
+feedparser
+gspread
+python-dotenv
+schedule
+flask
+moviepy==1.0.3
+numpy<2.0.0
+Pillow<10.0.0
+APScheduler
+google-auth
+google-api-python-client
+edge-tts
+aiofiles
+playwright

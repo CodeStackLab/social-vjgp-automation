@@ -1,0 +1,55 @@
+# AI-generated media (temp)
+generated_media/
+
+# Virtual environment
+venv/
+
+# Certbot certificates
+certbot/
+
+# Data files
+data/
+
+# Backup folder (Internal use)
+backups/
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+
+# OS files
+.DS_Store
+__MACOSX/
+
+# Credentials (IMPORTANT!)
+google_credentials.json
+CREDENTIALS_INPUT.env
+.env
+*.json
+!package.json
+app_settings.json
+data/app_settings.json
+/app/data/app_settings.json
+
+# Temporary files
+*.backup
+*.log
+index_backup.html
+
+# ALLOW ASSETS
+!assets/
+
+# EXCLUDE LARGE FILES (>100MB) FROM GITHUB
+assets/videos/*.mp4
+assets/videos/*.mov
+assets/Virtual\ Job\ Guru/Final\ Files/Final\ Files/PNG\ Files/Brand\ Guide.pdf
+assets/Virtual\ Job\ Guru/Final\ Files/Final\ Files/PNG\ Files/Brand\ Guide\ (1)pdf\ fff.pdf
+assets/Virtual\ Job\ Guru/Final\ Files/Final\ Files/PNG\ Files/VJG-social.ai
+
+# AUTOMATICALLY DETECTED LARGE BINARIES
+assets/**/*.mp4
+assets/**/*.mov
+assets/**/*.ai
+assets/**/*.pdf
+assets/**/*.zip

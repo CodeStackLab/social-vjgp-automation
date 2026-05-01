@@ -1,0 +1,21 @@
+[APPROVALS] Loaded 27 pending approvals
+[SCHEDULER] AI media cleanup scheduler started (runs every hour)
+[INFO] Starting Video Post Test (Final)...
+[INFO] Posting to: ['facebook', 'instagram', 'linkedin', 'youtube']
+[SOCIAL PUBLISH] Processing ['facebook', 'instagram', 'linkedin', 'youtube'] for: Video Integration Validated 🎬
+[POSTING] Publishing to facebook -> Virtual Job Guru (101936219459699)
+[SUCCESS] Posting: Published to facebook: https://www.facebook.com/928085403508534
+[POSTING] Publishing to instagram -> Instagram (Virtual Job Guru) (17841457357702308)
+[INSTAGRAM] Waiting for video processing (creation_id: 17995719302911924)...
+[INSTAGRAM] Status check 1/3: {'status_code': 'ERROR', 'status': 'Error: Media upload has failed with error code 2207076', 'id': '17995719302911924'}
+[ERROR] Posting: Failed to post to instagram: IG Processing Error: {'status_code': 'ERROR', 'status': 'Error: Media upload has failed with error code 2207076', 'id': '17995719302911924'}
+[POSTING] Publishing to linkedin -> Virtual Job Guru Roth (1iIcIDHeJn)
+[ERROR] Posting: Failed to post to linkedin: LinkedIn API Error: 422 - {"errorDetailType":"com.linkedin.common.error.BadRequest","message":"com.linkedin.content.common.exception.BadRequestResponseException: Content is a duplicate of urn:li:share:7426652271976894464","errorDetails":{"inputErrors":[{"description":"Duplicate post is detected","input":{},"code":"DUPLICATE_POST"}]},"status":422}
+[POSTING] Publishing to youtube -> Default Profile (me)
+[SUCCESS] Posting: Published to youtube: https://youtu.be/HoKoHEZ4ZKY
+
+--- RESULTS ---
+{
+  "facebook": "https://www.facebook.com/928085403508534",
+  "youtube": "https://youtu.be/HoKoHEZ4ZKY"
+}
