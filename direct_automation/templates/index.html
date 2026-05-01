@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Direct Social Dashboard | vJGU</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="background-blobs">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
+    </div>
+
+    <div class="dashboard-container">
+        <header>
+            <div class="logo">
+                <i class="fas fa-microchip"></i>
+                <span>Direct Automation</span>
+            </div>
+            <div class="user-info">
+                <span class="pulse"></span>
+                <span>System Online: vJGU VPS</span>
+            </div>
+        </header>
+
+        <main>
+            <section class="welcome">
+                <h1>Social Connectivity</h1>
+                <p>Manage your direct API connections without third-party dashboards.</p>
+            </section>
+
+            <div class="card-grid">
+                <!-- Facebook Card -->
+                <div class="card" id="facebook-card">
+                    <div class="card-header">
+                        <i class="fab fa-facebook facebook-icon"></i>
+                        <span class="status-badge" id="facebook-status">Checking...</span>
+                    </div>
+                    <h2>Facebook</h2>
+                    <p>Automate posts to Virtual Job Guru Page.</p>
+                    <div class="card-footer">
+                        <button class="btn btn-primary" id="btn-fb-connect">Connect</button>
+                    </div>
+                </div>
+
+                <!-- Instagram Card -->
+                <div class="card" id="instagram-card">
+                    <div class="card-header">
+                        <i class="fab fa-instagram instagram-icon"></i>
+                        <span class="status-badge" id="instagram-status">Checking...</span>
+                    </div>
+                    <h2>Instagram</h2>
+                    <p>Direct publishing to Business Account.</p>
+                    <div class="card-footer">
+                        <button class="btn btn-primary" id="btn-ig-connect">Connect</button>
+                    </div>
+                </div>
+
+                <!-- LinkedIn Card -->
+                <div class="card" id="linkedin-card">
+                    <div class="card-header">
+                        <i class="fab fa-linkedin linkedin-icon"></i>
+                        <span class="status-badge" id="linkedin-status">Not Connected</span>
+                    </div>
+                    <h2>LinkedIn</h2>
+                    <p>Professional network automation.</p>
+                    <div class="card-footer">
+                        <button class="btn btn-outline" id="btn-li-connect">Setup API</button>
+                    </div>
+                </div>
+
+                <!-- YouTube Card -->
+                <div class="card" id="youtube-card">
+                    <div class="card-header">
+                        <i class="fab fa-youtube youtube-icon"></i>
+                        <span class="status-badge" id="youtube-status">Not Connected</span>
+                    </div>
+                    <h2>YouTube</h2>
+                    <p>Video content distribution.</p>
+                    <div class="card-footer">
+                        <button class="btn btn-outline" id="btn-yt-connect">Setup API</button>
+                    </div>
+                </div>
+            </div>
+
+            <section class="logs-section">
+                <div class="section-header">
+                    <h3><i class="fas fa-terminal"></i> Recent Activity</h3>
+                    <button class="btn-text">Clear Logs</button>
+                </div>
+                <div class="logs-container" id="system-logs">
+                    <div class="log-entry info">[System] Dashboard initialized.</div>
+                    <div class="log-entry success">[Facebook] Connected - Virtual Job Guru</div>
+                    <div class="log-entry success">[Instagram] Connected - Business Account</div>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <p>&copy; 2026 Virtual Job Guru | Enterprise Social Engine</p>
+        </footer>
+    </div>
+
+    <script src="/static/js/app.js"></script>
+</body>
+</html>
