@@ -1113,16 +1113,31 @@ def post_to_blotato(post_data):
     for p in target_platforms:
         cid = CHANNELS.get(p)
         if not cid: continue
+        
+        # Apply truncation here as well (secondary defense)
+        raw_caption = post_data.get('caption', '')
+        raw_title = post_data.get('title', '')
+        
+        safe_caption = raw_caption[:2000] # Safe limit for most platforms
+        safe_title = raw_title
+        
+        if p == 'youtube': safe_title = raw_title[:100]
+        elif p == 'facebook': safe_title = raw_title[:255]
+        
         # V2 Blotato Post Structure
         payload = {
             "post": {
                 "accountId": cid,
                 "content": {
-                    "text": post_data.get('caption'),
+                    "text": safe_caption,
+                    "title": safe_title,
                     "mediaUrls": [media_url] if media_url else []
                 }
             }
         }
+        # In this implementation, it doesn't seem to actually send 'payload' to Blotato API yet,
+        # but if it did, it would be safe now.
+
     # DIRECT SOCIAL MEDIA POSTING
     print(f"[SOCIAL PUBLISH] Processing {target_platforms} for: {post_data.get('title', 'Untitled')}")
     
@@ -1242,7 +1257,8 @@ def post_to_blotato(post_data):
                              fb_token,
                              target['id'],
                              post_data.get('caption'),
-                             media_url
+                             media_url,
+                             title=post_data.get('title')
                          )
                          
                     elif platform == 'linkedin':
@@ -1404,7 +1420,7 @@ def process_queue():
                              rel_path = os.path.relpath(media_path, '/app/generated_media')
                              media_url = f"https://{os.getenv('DOMAIN', 'vjgu.online')}/videos/{rel_path}"
                              
-                             resp = social_uploader.post_to_facebook(fb_token, page_id, fb_conf.get('caption', ''), media_url)
+                             resp = social_uploader.post_to_facebook(fb_token, page_id, fb_conf.get('caption', ''), media_url, title=fb_conf.get('title'))
                              results['facebook'] = resp
                              if resp.get('success'): any_success = True
                         else:

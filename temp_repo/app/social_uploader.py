@@ -77,7 +77,7 @@ def post_to_linkedin(token, text, media_url=None):
     except Exception as e:
         return {"error": str(e)}
 
-def post_to_facebook(access_token, page_id, text, media_url=None):
+def post_to_facebook(access_token, page_id, text, media_url=None, title=None):
     """
     Post to Facebook Page via Graph API.
     """
@@ -85,28 +85,33 @@ def post_to_facebook(access_token, page_id, text, media_url=None):
         base_url = f"https://graph.facebook.com/v19.0/{page_id}"
         payload = {'access_token': access_token}
         
+        # Truncate text (caption/message) to safe limit
+        safe_text = text[:2000] if text else ""
+        
         if media_url:
             # Check if video
             is_video = media_url.endswith(('.mp4', '.mov', '.avi'))
             if is_video:
                 endpoint = f"{base_url}/videos"
-                payload['description'] = text
+                payload['description'] = safe_text
                 payload['file_url'] = media_url
+                if title:
+                    payload['title'] = title[:255]
+                    print(f"[FACEBOOK] Final title being sent to API: {payload['title']} (Original length: {len(title)})")
+
             else:
                 endpoint = f"{base_url}/photos"
-                payload['message'] = text
+                payload['message'] = safe_text
                 payload['url'] = media_url
         else:
             endpoint = f"{base_url}/feed"
-            payload['message'] = text
+            payload['message'] = safe_text
             
         resp = requests.post(endpoint, data=payload)
         data = resp.json()
         
         if 'id' in data:
             post_id = data['id']
-            # Format: https://facebook.com/{post_id}
-            # Although often it's pageId_postId
             return {"success": True, "id": post_id, "url": f"https://www.facebook.com/{post_id}"}
         
         return {"error": f"Facebook API Error: {data}"}
@@ -210,13 +215,15 @@ def upload_video_youtube(credentials, title, description, file_path, category_id
         body = {
             "snippet": {
                 "title": title[:100],
-                "description": description[:5000],
+                "description": (description or "")[:5000],
                 "categoryId": category_id
             },
             "status": {
                 "privacyStatus": privacy_status
             }
         }
+        print(f"[YOUTUBE] Final title being sent to API: {body['snippet']['title']} (Original length: {len(title)})")
+
         
         # Split file path if it's a URL (assuming it's local for now as Upload requires local file or stream)
         # If media_url is http, we need to download it first. 

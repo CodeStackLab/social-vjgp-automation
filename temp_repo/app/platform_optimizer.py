@@ -10,8 +10,8 @@ import textwrap
 # Platform specifications and character limits
 PLATFORM_SPECS = {
     "tiktok": {
-        "title_max": 100,
-        "description_max": 2200,
+        "title_max": 150,
+        "caption_max": 2000,
         "hashtag_range": (3, 5),
         "tone": "casual, trendy, energetic",
         "emoji_friendly": True,
@@ -20,6 +20,7 @@ PLATFORM_SPECS = {
         "height": 1920
     },
     "instagram": {
+        "title_max": 150,
         "caption_max": 2200,
         "hashtag_range": (5, 10),
         "tone": "engaging, visual, inspirational",
@@ -30,7 +31,7 @@ PLATFORM_SPECS = {
     },
     "youtube": {
         "title_max": 100,
-        "description_max": 1000,
+        "caption_max": 5000,
         "hashtag_range": (3, 5),
         "tone": "informative, searchable, clear",
         "emoji_friendly": False,
@@ -39,6 +40,7 @@ PLATFORM_SPECS = {
         "height": 1920
     },
     "facebook": {
+        "title_max": 255,
         "caption_max": 2000,
         "hashtag_range": (2, 4),
         "tone": "conversational, friendly",
@@ -48,7 +50,8 @@ PLATFORM_SPECS = {
         "height": 1080
     },
     "linkedin": {
-        "caption_max": 700,
+        "title_max": 200,
+        "caption_max": 3000,
         "hashtag_range": (3, 5),
         "tone": "professional, authoritative, insightful",
         "emoji_friendly": False,
@@ -57,6 +60,7 @@ PLATFORM_SPECS = {
         "height": 1350
     },
     "reels": {
+        "title_max": 150,
         "caption_max": 2200,
         "hashtag_range": (5, 10),
         "tone": "energetic, visual",
@@ -111,20 +115,21 @@ def generate_platform_content(
 
 
 def _generate_title(hook: str, keywords: List[str], spec: Dict) -> str:
-    """Generate SEO-optimized title"""
+    """Generate SEO-optimized title with strict length enforcement"""
     
     # Use hook as base, add primary keyword if space allows
     title = hook
+    title_max = spec.get("title_max", 100)
     
-    if len(title) < spec["title_max"] - 20 and keywords:
+    if len(title) < title_max - 20 and keywords:
         # Add primary keyword
         primary_keyword = keywords[0].title()
         if primary_keyword.lower() not in title.lower():
             title = f"{title} | {primary_keyword}"
     
-    # Truncate if needed
-    if len(title) > spec["title_max"]:
-        title = title[:spec["title_max"]-3] + "..."
+    # Strictly truncate if needed
+    if len(title) > title_max:
+        title = title[:title_max-3].strip() + "..."
     
     return title
 
